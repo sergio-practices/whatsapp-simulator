@@ -1,0 +1,36 @@
+body { position: absolute; background:#e6e6e6; margin: 0; top:0px; bottom:0px; left:0px; right:0px;}
+
+.close-side{color:white; left:15px; position: fixed; top: 7px; cursor:pointer;display: none; font-weight: bold;}
+
+.left-menu{ width: 180px; float:left; overflow-y: auto;  overflow-x: hidden;  background: #f1f1f1; height: 100%;}
+.left-menu ul {list-style-type: none; margin: 0;padding: 0; width: 100%;}
+.left-menu ul li{border:1px solid #fff;}
+.left-menu ul li:hover {cursor:pointer; background-color: #0c8fff;}
+.left-menu ul li span{font-family: Verdana, Geneva, sans-serif;}
+
+.telephones li span{display: inline-block; padding: 10px 10px 10px 5px; color: white;}
+
+.menu {color: white; font-weight: bold !important;}
+.order{color: black !important;}
+.menu-icon{position: relative; float: right; font-weight: bold; color: white;}
+.icon { position: relative; float: right; font-weight: bold; color: black;}
+[data-icon]:before {content: attr(data-icon);}
+
+.gray { background-color: #616161; color: black; padding: 8px 20px; border: 0px !important}
+.clear { background-color: #f1f1f1; color: white; padding: 8px 20px;}
+.green { background-color: #4CAF50; color: white; }
+
+.dropdown-content {display: none; position: absolute; background-color: #f9f9f9; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); left:160px; top:36px; z-index:3;}
+.dropdown-content a {display: block; color: #000; font-size: 15px; font-family: Verdana,sans-serif; text-decoration:none !important; padding: 8px 20px; text-decoration: none;}
+.dropdown-content a:hover {background-color: #f1f1f1}
+.clear:hover + .dropdown-content, .dropdown-content:hover {display: block;}
+
+.container-header{ background-color: #616161; color: black; height: 20px; margin: 0 -10px; font-family: Verdana,sans-serif;}
+.dynamic-info { display:inline;}
+.static-info { width:50px; float: right;}
+.new-request { width: 25px; float: right; cursor: pointer; }
+.header-left { position: relative; float: left; color: white; margin: 0px 30px;border: 0px !important; white-space:nowrap;}
+.header-right { position: relative; bold; color: white; white-space:nowrap;}
+
+.errors { position: fixed; z-index:2; left:0; right:0; top:35px; padding: 0 10px; margin-left: 180px;}
+.error-close{ top: 5px; right: 5px; position: absolute; cursor: pointer; }

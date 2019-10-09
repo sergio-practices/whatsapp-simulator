@@ -1,0 +1,67 @@
+==========================
+==== WhatsApp Web Min ====
+==========================
+
+-----Download MongoDB on your local and install (default settings, no user, localhost:27017)-----
+https://docs.mongodb.com/manual/administration/install-community/
+
+-----Create directories to load images and videos-----
+mkdir C:\whatsappsim\images
+mkdir C:\whatsappsim\videos\
+mkdir C:\whatsappsim\docs\
+
+-----Open mongodb shell and create the database and collections-----
+use whatsappsim;
+db.telephones.drop();
+db.messages.drop();
+
+-----Insert data (you don't need this to run the project, but you will see information at start)-----
+------REQUESTS-----
+db.telephones.insert([
+{communicationId: '9a150a30-d8e4-4b4b-9f1c-01bb4205ab02', telephone:'666666001', telephoneTo: '666666002', description:'Robert Hooke', date: ISODate('2019-10-08T11:50:42.389Z')},
+{communicationId: '9a150a30-d8e4-4b4b-9f1c-01bb4205ab02', telephone:'666666002', telephoneTo: '666666001', description:'Isaac Newton', date: ISODate('2019-10-08T11:50:42.389Z')},
+{communicationId: 'de36b0c8-e9c9-11e9-81b4-2a2ae2dbcce4', telephone:'666666001', telephoneTo: '666666003', description:'Nikola Tesla', date: ISODate('2019-10-08T21:53:42.718Z')},
+{communicationId: 'de36b0c8-e9c9-11e9-81b4-2a2ae2dbcce4', telephone:'666666003', telephoneTo: '666666001', description:'Newton', date: ISODate('2019-10-08T21:53:42.718Z')},
+{communicationId: 'e1e1cb50-e669-4d38-bc33-5e851278e9e6', telephone:'666666001', telephoneTo: '666666004', advices: '1', description:'Albert Einstein', date: ISODate('2019-10-08T22:50:33.387Z')},
+{communicationId: 'e1e1cb50-e669-4d38-bc33-5e851278e9e6', telephone:'666666004', telephoneTo: '666666001', description:'666666001', date: ISODate('2019-10-08T22:50:33.387')}
+]);
+
+-----MESSAGES-----
+db.messages.insert([
+{'communicationId' : '9a150a30-d8e4-4b4b-9f1c-01bb4205ab02', 'telephone' : '666666001', 'dates' : { 'user': NumberLong('1570540299815'), 'send' : NumberLong('1570540299888'), 'receive' : NumberLong('1570540299888') }, 'text' : 'If I have seen further it is by standing on the shoulders of Giants.' },
+{'communicationId' : '9a150a30-d8e4-4b4b-9f1c-01bb4205ab02', 'telephone' : '666666002', 'dates' : { 'user': NumberLong('1570540824857'), 'send' : NumberLong('1570540827671'), 'receive' : NumberLong('1570540827671') }, 'text' : 'By the help of microscopes, there is nothing so small, as to escape our inquiry; hence there is a new visible world discovered to the understanding.' },
+{'communicationId' : '9a150a30-d8e4-4b4b-9f1c-01bb4205ab02', 'telephone' : '666666001', 'dates' : { 'user': NumberLong('1570569603534'), 'send' : NumberLong('1570569603545'), 'receive' : NumberLong('1570630321644') }, 'text' : 'End of discussion, Hooke &#x1F942;' },
+{'communicationId' : 'de36b0c8-e9c9-11e9-81b4-2a2ae2dbcce4', 'telephone' : '666666003', 'dates' : { 'user': NumberLong('1570542025699'), 'send' : NumberLong('1570542025705'), 'receive' : NumberLong('1570542030719') }, 'text' : 'The day science begins to study non-physical phenomena, it will make more progress in one decade than in all the previous centuries of its existence.' },
+{'communicationId' : 'de36b0c8-e9c9-11e9-81b4-2a2ae2dbcce4', 'telephone' : '666666001', 'dates' : { 'user': NumberLong('1570542047443'), 'send' : NumberLong('1570542047450') }, 'text' : 'Truth is ever to be found in simplicity, and not in the multiplicity and confusion of things.'},
+{'communicationId' : 'e1e1cb50-e669-4d38-bc33-5e851278e9e6', 'telephone' : '666666001', 'dates' : { 'user': NumberLong('1570542083420'), 'send' : NumberLong('1570542083426'), 'receive' : NumberLong('1570542083426') }, 'text' : 'I can calculate the motion of heavenly bodies, but not the madness of people.' },
+{'communicationId' : 'e1e1cb50-e669-4d38-bc33-5e851278e9e6', 'telephone' : '666666004', 'dates' : { 'user': NumberLong('1570542102491'), 'send' : NumberLong('1570542102499') }, 'text' : "If you can't explain it to a six year old, you don't understand it yourself." }
+]);
+
+---------You can try your collections---------
+db.telephones.find({'communicationId' : '9a150a30-d8e4-4b4b-9f1c-01bb4205ab02'})
+db.messages.find({'communicationId' : 'de36b0c8-e9c9-11e9-81b4-2a2ae2dbcce4'});;
+
+---------Run WhatsAppSimApplication and try to message between users---------
+
+Isaac Newton
+http://localhost:8080/html/telephones.html?telephone=666666001
+Robert Hooke
+http://localhost:8080/html/telephones.html?telephone=666666002
+Nikola Tesla
+http://localhost:8080/html/telephones.html?telephone=666666003
+Albert Einstein
+http://localhost:8080/html/telephones.html?telephone=666666004
+
+                      .   *        .       .
+ .                 |        *      .     -0-
+       *  o     .    '       *      .        o
+              .         .        |      *
+   *             *              -O-          .
+         .             *         |     ,
+                .           o
+        .---.
+  =   _/__~0_\_     .  *            o       '
+ = = (_________)             .
+                 .                        *
+       *               - ) -       *
+Sergio P.F.

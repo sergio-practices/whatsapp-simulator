@@ -1,0 +1,14 @@
+.controls{display: block; padding: 10px 0;}
+.container{padding: 0 10px;}
+
+.messages { list-style-type: none; margin: 0; padding: 0; height: calc(100vh - 100px); overflow:auto; }
+
+.controls{ padding: 10px 0px 0px 0px; }
+.input-text { width: 100%; display: inline-block;padding: 0px; height:41px; font-size: 16px; border: solid 1px; border-radius:4px;}
+.button-control{ width: 80px; display: inline-block; height: 41px; cursor: pointer; border: solid 1px; border-radius:4px;}
+.input-div{ display: inline-block; padding: 0 10px; height: 39px; width:calc(100% - 184px);}
+.button-send:hover{ cursor: pointer;}
+.input-attach{ display:none; opacity: 0 !important; }
+.clip { background: #0c8fff url(/img/clip.png) center no-repeat; float: left;}
+.send { background: #0c8fff url(/img/send.png) center no-repeat; float: right;}
+

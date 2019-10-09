@@ -1,0 +1,12 @@
+    <script type="text/javascript" src="/js/messages/thumbnail.js"></script>
+    <script type="text/javascript" src="/js/messages/loadMessages.js"></script>
+    <script type="text/javascript" src="/js/messages/controlsMessages.js"></script>
+    
+    <div id="messages" class="messages"></div>
+    <div id="controls" class="controls">
+      <input type="file" id="files" class="input-attach button-control clip" name="files" onchange="attachFiles(event)"/>
+      <div id="buttonAttach" class="button-control clip" onclick="resetFiles()"></div>
+      <div class="input-div"><textarea class="input-text" id="inputSend" autocomplete="off"></textarea></div>
+      <div id="sendMessage" class="button-control send" onclick="sendButton()"></div>
+    </div>
+    <script type="text/javascript" src="/js/messages/messages.js"></script>
