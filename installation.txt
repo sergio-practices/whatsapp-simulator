@@ -5,11 +5,6 @@
 -----Download MongoDB on your local and install (default settings, no user, localhost:27017)-----
 https://docs.mongodb.com/manual/administration/install-community/
 
------Create directories to load images and videos-----
-mkdir C:\whatsappsim\images
-mkdir C:\whatsappsim\videos\
-mkdir C:\whatsappsim\docs\
-
 -----Open mongodb shell and create the database and collections-----
 use whatsappsim;
 db.telephones.drop();
