@@ -65,6 +65,7 @@ public class FileService {
 		data = data.substring(data.indexOf(",")+1);
     	byte[] imageDataBytes = Base64.getDecoder().decode(data);
         FileOutputStream imageOutFile = new FileOutputStream(filePath);
+        
         imageOutFile.write(imageDataBytes);
         imageOutFile.flush();
         imageOutFile.close();

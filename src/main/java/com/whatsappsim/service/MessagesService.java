@@ -1,5 +1,6 @@
 package com.whatsappsim.service;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
@@ -22,9 +23,9 @@ public class MessagesService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(TelephonesService.class);
 
-	private static final String imagePath = "C:/whatsappsim/images/";
-	private static final String videoPath = "C:/whatsappsim/videos/";
-	private static final String docPath = "C:/whatsappsim/docs/";
+	private static final String imagePath = "upload/images/";
+	private static final String videoPath = "upload/videos/";
+	private static final String docPath = "upload/docs/";
 	
 	@Autowired
 	private TelephonesService requestsService;
@@ -42,7 +43,7 @@ public class MessagesService {
 		messageDTO.setTelephone(telephone);
 		messageDTO.setCommunicationId(communicationId);
 
-		
+		//Goes to database
 		Message message = new Message(communicationId,
 				telephone, messageDTO.getText(), null);
 		
@@ -52,27 +53,28 @@ public class MessagesService {
 	    if (null != messageDTO.getImages()
 	    		&& !messageDTO.getImages().isEmpty()){
 	    	existsImage=true;
-	    	saveFile(messageDTO.getImages().get(0), imagePath);
+	    	String filePath = saveFile(messageDTO.getImages().get(0), imagePath);
+	    	messageDTO.getImages().get(0).setReal(filePath);
 	    	message.setImages(messageDTO.getImages());
 	    }else if (null != messageDTO.getVideos()
 	    		&& !messageDTO.getVideos().isEmpty()){
 	    	existsVideo=true;
-	    	saveFile(messageDTO.getVideos().get(0), videoPath);
+	    	String filePath = saveFile(messageDTO.getVideos().get(0), videoPath);
+	    	messageDTO.getVideos().get(0).setReal(filePath);
 	        message.setVideos(messageDTO.getVideos());
 	    }else if (null != messageDTO.getDocs()
 	    		&& !messageDTO.getDocs().isEmpty()){
 	    	existsDoc=true;
-	    	saveFile(messageDTO.getDocs().get(0), docPath);
+	    	String filePath = saveFile(messageDTO.getDocs().get(0), docPath);
+	    	messageDTO.getDocs().get(0).setReal(filePath);
 	        message.setDocs(messageDTO.getDocs());
 	    }
 	    
     	String notifyToTopic= WebSocketTopics.topicMessages + communicationId + "/" + telephoneTo + "/" + telephone;
     	boolean isReceiverSubscribed =  WebSocketConnectionsListener.getMessagesSuscriptors().containsValue(notifyToTopic);
 	    
-	    //We fill the object with timestamp data about times.
-	    //timestamp: date the user sent
-	    //send: date the message was stored
-	    //receive: date the message was reived If we dont have receiver we don't fill this record
+	    //Fill the object with timestamps.
+	    //user: date the user sent; send: date the message was stored; receive: date the message was reived If we dont have receiver we don't fill this record
 	    Map<String, Long> dates = messageDTO.getDates();
 	    dates.put("send", new Date().getTime());
 	    if (isReceiverSubscribed){
@@ -113,14 +115,15 @@ public class MessagesService {
 	/**
 	 * Save the file to 
 	 */
-	private void saveFile(FileDTO file, String path) throws IOException {
+	private String saveFile(FileDTO file, String path) throws IOException {
     	String videoName = file.getName();
     	String videoExtension = videoName.substring(videoName.lastIndexOf('.'));
     	String timestamp = String.valueOf(new Date().getTime());
-    	String filePath = path + timestamp + videoExtension;
+    	String fileAbsolutePath = new File(imagePath).getAbsolutePath() + timestamp + videoExtension;
     	
-    	fileService.saveFile(filePath, file.getReal());
-    	file.setReal(filePath);
+    	fileService.saveFile(fileAbsolutePath, file.getReal());
+    	return fileAbsolutePath;
+    	
 	}
 	
 }
