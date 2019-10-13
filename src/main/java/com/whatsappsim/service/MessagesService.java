@@ -23,9 +23,15 @@ public class MessagesService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(TelephonesService.class);
 
+<<<<<<< HEAD
 	private static final String imagePath = "upload/images";
 	private static final String videoPath = "upload/videos";
 	private static final String docPath = "upload/docs";
+=======
+	private static final String imagePath = "upload/images/";
+	private static final String videoPath = "upload/videos/";
+	private static final String docPath = "upload/docs/";
+>>>>>>> branch 'master' of https://github.com/sergiopf/whatsapp-simulator
 	
 	@Autowired
 	private TelephonesService requestsService;
@@ -53,18 +59,31 @@ public class MessagesService {
 	    if (null != messageDTO.getImages()
 	    		&& !messageDTO.getImages().isEmpty()){
 	    	existsImage=true;
-	    	saveFile(messageDTO.getImages().get(0), imagePath);
+	    	String filePath = saveFile(messageDTO.getImages().get(0), imagePath);
+	    	messageDTO.getImages().get(0).setReal(filePath);
 	    	message.setImages(messageDTO.getImages());
 	    }else if (null != messageDTO.getVideos()
 	    		&& !messageDTO.getVideos().isEmpty()){
 	    	existsVideo=true;
+<<<<<<< HEAD
 	    	saveFile(messageDTO.getVideos().get(0), videoPath);
 	    	message.setVideos(messageDTO.getVideos());
+=======
+	    	String filePath = saveFile(messageDTO.getVideos().get(0), videoPath);
+	    	messageDTO.getVideos().get(0).setReal(filePath);
+	        message.setVideos(messageDTO.getVideos());
+>>>>>>> branch 'master' of https://github.com/sergiopf/whatsapp-simulator
 	    }else if (null != messageDTO.getDocs()
 	    		&& !messageDTO.getDocs().isEmpty()){
 	    	existsDoc=true;
+<<<<<<< HEAD
 	    	saveFile(messageDTO.getDocs().get(0), docPath);
 	    	message.setDocs(messageDTO.getDocs());
+=======
+	    	String filePath = saveFile(messageDTO.getDocs().get(0), docPath);
+	    	messageDTO.getDocs().get(0).setReal(filePath);
+	        message.setDocs(messageDTO.getDocs());
+>>>>>>> branch 'master' of https://github.com/sergiopf/whatsapp-simulator
 	    }
 	    
     	String notifyToTopic= WebSocketTopics.topicMessages + communicationId + "/" + telephoneTo + "/" + telephone;
@@ -112,14 +131,15 @@ public class MessagesService {
 	/**
 	 * Save the file to 
 	 */
-	private void saveFile(FileDTO file, String path) throws IOException {
+	private String saveFile(FileDTO file, String path) throws IOException {
     	String videoName = file.getName();
     	String videoExtension = videoName.substring(videoName.lastIndexOf('.'));
     	String timestamp = String.valueOf(new Date().getTime());
     	String fileAbsolutePath = new File(path).getAbsolutePath() + "/" + timestamp + videoExtension;
-    	
     	fileService.saveFile(fileAbsolutePath, file.getReal());
     	file.setReal(fileAbsolutePath);
+
+    	return fileAbsolutePath; 	
 	}
 	
 }
