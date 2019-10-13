@@ -23,9 +23,9 @@ public class MessagesService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(TelephonesService.class);
 
-	private static final String imagePath = "upload/images/";
-	private static final String videoPath = "upload/videos/";
-	private static final String docPath = "upload/docs/";
+	private static final String imagePath = "upload/images";
+	private static final String videoPath = "upload/videos";
+	private static final String docPath = "upload/docs";
 	
 	@Autowired
 	private TelephonesService requestsService;
@@ -116,7 +116,7 @@ public class MessagesService {
     	String videoName = file.getName();
     	String videoExtension = videoName.substring(videoName.lastIndexOf('.'));
     	String timestamp = String.valueOf(new Date().getTime());
-    	String fileAbsolutePath = new File(imagePath).getAbsolutePath() + timestamp + videoExtension;
+    	String fileAbsolutePath = new File(path).getAbsolutePath() + "/" + timestamp + videoExtension;
     	
     	fileService.saveFile(fileAbsolutePath, file.getReal());
     	file.setReal(fileAbsolutePath);
