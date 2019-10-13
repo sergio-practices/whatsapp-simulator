@@ -53,25 +53,18 @@ public class MessagesService {
 	    if (null != messageDTO.getImages()
 	    		&& !messageDTO.getImages().isEmpty()){
 	    	existsImage=true;
-	    	String filePath = saveFile(messageDTO.getImages().get(0), imagePath);
-	    	messageDTO.getImages().get(0).setReal(filePath);
+	    	saveFile(messageDTO.getImages().get(0), imagePath);
 	    	message.setImages(messageDTO.getImages());
 	    }else if (null != messageDTO.getVideos()
 	    		&& !messageDTO.getVideos().isEmpty()){
 	    	existsVideo=true;
 	    	saveFile(messageDTO.getVideos().get(0), videoPath);
 	    	message.setVideos(messageDTO.getVideos());
-	    	String filePath = saveFile(messageDTO.getVideos().get(0), videoPath);
-	    	messageDTO.getVideos().get(0).setReal(filePath);
-	        message.setVideos(messageDTO.getVideos());
 	    }else if (null != messageDTO.getDocs()
 	    		&& !messageDTO.getDocs().isEmpty()){
 	    	existsDoc=true;
 	    	saveFile(messageDTO.getDocs().get(0), docPath);
 	    	message.setDocs(messageDTO.getDocs());
-	    	String filePath = saveFile(messageDTO.getDocs().get(0), docPath);
-	    	messageDTO.getDocs().get(0).setReal(filePath);
-	        message.setDocs(messageDTO.getDocs());
 	    }
 	    
     	String notifyToTopic= WebSocketTopics.topicMessages + communicationId + "/" + telephoneTo + "/" + telephone;
